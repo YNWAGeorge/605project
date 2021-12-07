@@ -1,7 +1,7 @@
 ---
-title: "1st_drift"
-author: "Yifan Du"
-date: "12/5/2021"
+title: "1st_draft"
+author: "Ouyang Xu"
+date: "12/6/2021"
 output: html_document
 ---
 
@@ -24,7 +24,7 @@ udmodel <- udpipe_load_model(file = udmodel$file_model)
 
 
 ```{r}
-data_2 <- read.csv("camera.csv") %>% filter(word.stem != "br" & word.stem != "camera")
+data_2 <- read.csv("../Data/camera.csv") %>% filter(word.stem != "br" & word.stem != "camera")
 
 
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -50,7 +50,7 @@ data_4 <- data_2 %>% select(-X) %>%
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
   head(30)
 
-
+library(ggplot2)
 word="refund"
 print(data_2 %>%
         filter(word.stem == word) %>%
