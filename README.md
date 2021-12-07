@@ -1,5 +1,5 @@
 # STAT605GroupProject
-
+Amazon is the online retailer with the largest variety of products in the world. It’s meaningful for either customers or the business owners to know more about the reviews of the items. Our main goal is to explore which aspects are mostly mentioned. This can help sellers improve their stars. So we use CHTC/HPC to find the relationship between the high frequency words and rating stars.
 ## Table of Contents
   - [Dependencies](#dependencies)
 
