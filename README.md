@@ -21,9 +21,6 @@ Amazon is the online retailer with the largest variety of products in the world.
 ## Dependencies
 - [Python 3.6+](https://www.python.org/)
 - [R 4.0+](https://www.r-project.org/)
-- [R Shiny](https://github.com/rstudio/shiny)(Shiny is supported on the latest release version of R, as well as the previous four minor release versions of R)
-
-
 
 ## Installation
 These commands assume that your Python version is 3.6+ and basic Machine Learning modules are already installed.
