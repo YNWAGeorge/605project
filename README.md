@@ -19,7 +19,6 @@ Amazon is the online retailer with the largest variety of products in the world.
 
 ***
 ## Dependencies
-- [Python 3.6+](https://www.python.org/)
 - [R 4.0+](https://www.r-project.org/)
 
 ## Installation
