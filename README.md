@@ -1,4 +1,4 @@
-# YelpDataAnalysis
+# AmazonDataAnalysis
 Amazon is the online retailer with the largest variety of products in the world. It’s meaningful for either customers or the business owners to know more about the reviews of the items. Our main goal is to explore which aspects are mostly mentioned. This can help sellers improve their stars. So we use CHTC/HPC to find the relationship between the high frequency words and rating stars.
 <!-- *** -->
 ***
@@ -57,5 +57,7 @@ This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John 
 - **Ouyang Xu** - (oxu2@wisc.edu) : Contribute to 
 
 - **Tinghui Xu** - (txu98@wisc.edu) : Contribute to 
+
+- **Yijin Guan** - (yguan37@wisc.edu) : Contribute to
 
 
