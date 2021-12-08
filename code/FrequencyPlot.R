@@ -37,22 +37,8 @@ data_4 <- data_2 %>% select(-X) %>%
 
 
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
-  head(6)
+  head(3)
 
-
-# word="refund"
-# print(data_2 %>%
-#         filter(word.stem == word) %>%
-#         ggplot()+
-#         geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-#         ggtitle(word))
-
-
-# data_4$word.stem[data_4$star_3<data_4$star_2]
-
-
-
-# word_list1 <- c("price","tripod","len","lamp","dvd","polici","refund","plugin","flicker")
 word_list1 = most_freq_word
 
 data_2 <- read.csv("../data/book.csv") %>% filter(word.stem != "br" & word.stem != "book")
@@ -94,7 +80,7 @@ data_4 <- data_2 %>% select(-X) %>%
 
 
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
-  head(6)
+  head(3)
 
 
 # word="refund"
@@ -147,7 +133,7 @@ data_4 <- data_2 %>% select(-X) %>%
 
 
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
-  head(6)
+  head(3)
 
 
 
@@ -188,7 +174,7 @@ data_4 <- data_2 %>% select(-X) %>%
 
 
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
-  head(6)
+  head(3)
 
 
 
@@ -229,7 +215,7 @@ data_4 <- data_2 %>% select(-X) %>%
 
 
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
-  head(6)
+  head(3)
 
 
 
@@ -270,7 +256,7 @@ data_4 <- data_2 %>% select(-X) %>%
 
 
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
-  head(6)
+  head(3)
 
 
 
