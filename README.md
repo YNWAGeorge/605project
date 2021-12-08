@@ -56,4 +56,6 @@ This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John 
 
 - **Ouyang Xu** - (oxu2@wisc.edu) : Contribute to 
 
+- **Tinghui Xu** - (txu98@wisc.edu) : Contribute to 
+
 
