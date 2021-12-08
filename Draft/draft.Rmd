@@ -62,7 +62,14 @@ In order to make our result and conclusion more precise, we do some work before 
 
 ## 2.4 Computation for words frequency
 
-We groupe our word boxes to get words frequency results. Since we split the raw data, we extracte top 2000 words in each split file and merge them into one .csv file. Then we select all the nouns from the words we get. We do these on each of the 6 sub files since they are different product categories. 
+We groupe our word boxes to get words frequency results. Since we split the raw data, we extracte top 2000 words in each split file and merge them into one .csv file. Then we select all the nouns from the words we get. We do these on each of the 6 sub files since they are different product categories.
+### book
+```{r, echo = F}
+data_2 <- read.csv("../Data/book.csv") %>% filter(word.stem != "br" & word.stem != "book")
+data_2$star_rating <- data_2$star_rating %>% factor
+data_2$star_rating <- str_c("star_",data_2$star_rating)
+kable(data_2[13:17, -1])
+```
 ### camera
 ```{r, echo = F}
 data_2 <- read.csv("../Data/camera.csv") %>% filter(word.stem != "br" & word.stem != "camera")
