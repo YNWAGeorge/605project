@@ -31,13 +31,12 @@ pip install nltk
 ```
 This project depends upon a knowledge of  the packages in R, you can install with:
 ```
-install.packages("car")
-install.packages("tidyverse")
-install.packages("caret")
-install.packages("broom")
-install.packages("MVA")
-install.packages("biwt")
-install.packages("robustbase")
+install.packages("tidytext")
+install.packages("dplyr")
+install.packages("SnowballC")
+install.packages("tidyr")
+install.packages("readr")
+install.packages("stringr")
 ```
 
 
