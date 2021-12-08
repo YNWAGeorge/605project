@@ -5,7 +5,7 @@ date: "12/6/2021"
 output: html_document
 ---
 
-```{r}
+```{r, echo = F, message = F, warning = F}
 library(tidytext)
 library(tidyr)
 library(dplyr)
@@ -18,12 +18,10 @@ udmodel <- udpipe_download_model(language = "english")
 udmodel <- udpipe_load_model(file = udmodel$file_model)
 
 
-#rm(list = ls())
-
 ```
 
 
-```{r}
+```{r, echo = F}
 data_2 <- read.csv("../Data/camera.csv") %>% filter(word.stem != "br" & word.stem != "camera")
 
 
@@ -65,7 +63,7 @@ data_4$word.stem[data_4$star_3<data_4$star_2]
 ```
 
 
-```{r}
+```{r, echo = F}
 
 for( word in most_freq_word){
 print(data_2 %>%
@@ -74,8 +72,3 @@ print(data_2 %>%
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
     ggtitle(word) )
 }
-
-```
-
-
-```{r}
