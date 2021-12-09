@@ -29,7 +29,7 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 ## File Description in Code Folder
 
 - `kaggle_download.sh`: to download data files from kaggle. You may need a kaggle account and an api.
-- `install_R.sh`: to install packages that are needed.
+- `install_R.sh`&`interactive.sub`: to install packages that are needed.
 - `split.sh`: to split all the tsv files into tens of small tsv files, each 100MB. And then, it will return a list of all the small files, named as "file_list".
 - `word_freq.sub/.sh/.R`: to calculate on these files in parallel. It will do the tokenization and lemmatizaiton and then count the word frequency in each small tsv files.
 - `merge.sh`: to merge all the small tsv files into one csv file.
