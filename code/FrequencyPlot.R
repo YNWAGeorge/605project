@@ -101,7 +101,7 @@ ggsave(
   "../image/camera.png",
   dpi = 150
 )
-dev.off()
+
 
 data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
 
@@ -144,7 +144,7 @@ ggsave(
   "../image/Ebook.png",
   dpi = 150
 )
-dev.off()
+
 
 data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
 
@@ -187,7 +187,7 @@ ggsave(
   "../image/Electronics.png",
   dpi = 150
 )
-dev.off()
+
 
 data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
 
@@ -230,7 +230,7 @@ ggsave(
   "../image/Mobile.png",
   dpi = 150
 )
-dev.off()
+
 
 data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
 
@@ -273,4 +273,3 @@ ggsave(
   "../image/videodownload.png",
   dpi = 150
 )
-dev.off()

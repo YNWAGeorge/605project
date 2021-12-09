@@ -10,13 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-Github: https://github.com/YNWAGeorge/STAT605GroupProject
+More details can be seen on our [GitHub repository](https://github.com/YNWAGeorge/STAT605GroupProject).
 
 
 # 1 Introduction
 
 
-As we all know, Amazon is the online retailer with the largest variety of products in the world. It's meaningful for either customers or the business owners to know more about the reviews of the items. Our main goal is to explore which aspects are mostly mentioned. This can help sellers improve their stars. So we use CHTC/HPC to find the relationship between the high frequency words and rating stars.
+As we all know, Amazon is the online retailer with the largest variety of products in the world. It's meaningful for either customers or business owners to know more about the reviews of the items. Our main goal is to explore which aspects are mostly mentioned. This can help sellers improve their stars. So we use CHTC/HPC to find the relationship between the high-frequency words and rating stars.
 
 
 # 2 Methodology
@@ -25,7 +25,7 @@ As we all know, Amazon is the online retailer with the largest variety of produc
 ## 2.1 Description of data
 
 
-Our Amazon dataset can be obtained from Kaggle(https://www.kaggle.com/cynthiarempel/amazon-us-customer-reviews-dataset). Amazon is founded in 1994 and it developed to be the largest integrated online retailer in 1997. In a period of over two decades since the first review in 1995, millions of Amazon customers have contributed more than hundred million reviews to express opinions and describe their experiences regarding products on the Amazon.com website. This makes Amazon Customer Reviews a rich source of information for academic researchers in the fields of Natural Language Processing (NLP), Information Retrieval (IR), and Machine Learning (ML), amongst others. Our dataset contains 6 sub files. Each file contains the sales records and comments of a certain category of goods in the US. Each data file has 15 columns containing variables like 'product_category', 'star_rating', and 'review_body' etc. And there are totally 22175051 reviews in our data set.
+Our Amazon dataset can be obtained from [Kaggle's Amazon US Customer Reviews Dataset](https://www.kaggle.com/cynthiarempel/amazon-us-customer-reviews-dataset). Amazon is founded in 1994 and it developed to be the largest integrated online retailer in 1997. In a period of over two decades since the first review in 1995, millions of Amazon customers have contributed more than a hundred million reviews to express opinions and describe their experiences regarding products on the Amazon.com website. This makes Amazon Customer Reviews a rich source of information for academic researchers in the fields of Natural Language Processing (NLP), Information Retrieval (IR), and Machine Learning (ML), amongst others. Our dataset contains 6 subfiles. Each file contains the sales records and comments of a certain category of goods in the US. Each data file has 15 columns containing variables like 'product_category', 'star_rating', and 'review_body' etc. And there are 22175051 reviews in our data set.
 
 
 ```{r, echo = F, message = F, warning = F}
@@ -52,17 +52,17 @@ udmodel <- udpipe_load_model(file = udmodel$file_model)
 
 First, we use a bash file named "split.sh" to split all 6 tsv files into tens of small tsv files, each 100MB. Then we run "word_freq_array.sh" to access these files to do the parallel computation for each category. Finally, "merge.sh" merges all the csv files into a combined csv file using the given category.
 
-For example, we split the camera.tsv (1.1GB) into 11 small tsv files. After that, we run "word_freq_array_camera.sh" to launch 11 small jobs. Each job does the tokenization and lemmatization to each csv file, and then calculates the frequency of each word, returning a csv file with Column word, star_ratings, and frequency. Then, a bash file named "merge.sh" merges all these csv files about camera into one csv file. 
+For example, we split the camera.tsv (1.1GB) into 11 small tsv files. After that, we run "word_freq_array_camera.sh" to launch 11 small jobs. Each job does the tokenization and lemmatization to each csv file, and then calculates the frequency of each word, returning a csv file with Column word, star_ratings, and frequency. Then, a bash file named "merge.sh" merges all these csv files about the camera into one csv file. 
 
-At last, we got 6 combined csv files for further analysis, which were done in local.
+At last, we got 6 combined csv files for further analysis, which were done locally.
 
 ## 2.3 Text processing
 
-In order to make our result and conclusion more precise, we do some work before we do tokenization on the customers' reviews. First we remove all of the punctuation and some html elements like *\<br/>* and *\&#34;*. Then we turn each and every letter to lower-case letter and do lemmatization, which can transform words like 'swims', 'swam', 'swimming' to 'swim'. After this we do tokenization to separate the strings into single words. At last we remove all the stop words to get our final word boxes. 
+In order to make our result and conclusion more precise, we do some work before we do tokenization on the customers' reviews. First, we remove all of the punctuation and some html elements like *\<br/>* and *\&#34;*. Then we turn each letter into lower-case letters and do lemmatization, which can transform words like 'swims', 'swam', 'swimming' to 'swim'. After this, we do tokenization to separate the strings into single words. At last, we remove all the stop words to get our final word boxes. 
 
 ## 2.4 Computation for words frequency
 
-We groupe our word boxes to get words frequency results. Since we split the raw data, we extracte top 2000 words in each split file and merge them into one .csv file. Then we select all the nouns from the words we get. We do these on each of the 6 sub files since they are different product categories.
+We grouped our word boxes to get words frequency results. Since we split the raw data, we extracted top 2000 words in each split file and merge them into one .csv file. Then we select all the nouns from the words we get. We do these on each of the 6 sub files since they are different product categories.
 ### book
 ```{r, echo = F}
 data_2 <- read.csv("../Data/book.csv") %>% filter(word.stem != "br" & word.stem != "book")
@@ -80,7 +80,7 @@ kable(data_2[13:17, -1])
 
 ## 2.5 Word frequency v.s. Star rating plot
 
-In 2.4, when we are getting words frequency, we keep the star rating and the product category of the reviews where certain words are split from. So we have the relationship between high frequency words and star ratings. And we can intuitively analyse some of the interesting words and based on these we can make suggestions or predictions.
+In 2.4, when we are getting words frequency, we keep the star rating and the product category of the reviews where certain words are split from. So we have the relationship between high-frequency words and star ratings. And we can intuitively analyze some of the interesting words and based on these we can make suggestions or predictions.
 
 ```{r, echo = F}
 noun <- udpipe_annotate(udmodel, 
@@ -97,21 +97,272 @@ data_4 <- data_2 %>% select(-X) %>%
 
 kable(data_4[13:17, -1])
 ```
+Next, we are going to give suggestions to particular business owners about what they are ought to do in light of the marked words related to stars.
 
-# 3 Conclusion
+### Book
 
+- The stories and writers are important to readers so we suggest to sell popular and intriguing books.
 ```{r, echo = F}
-word_list1 <- c("price","tripod","len","lamp","dvd","polici","refund","plugin","flicker")
-data_2 <- read.csv("../Data/camera.csv") %>% filter(word.stem != "br" & word.stem != "camera")
+data_2 <- read.csv("../data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
+
+
+data_2$star_rating <- data_2$star_rating %>% factor
+
+data_2$star_rating <- str_c("star_",data_2$star_rating)
+
+noun <- udpipe_annotate(udmodel, 
+                     unique(data_2$word.stem)) %>% 
+  as.data.frame() %>% 
+  select(token, upos) %>% filter(upos == "NOUN") %>% unlist
+
+data_3 <- data_2 %>% filter(word.stem %in% noun) %>% 
+  group_by(word.stem) %>%
+  summarise(all_freq = sum(frequency)) 
+
+data_4 <- data_2 %>% select(-X) %>% 
+  spread(star_rating, frequency)
+
+
+most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
+  head(3)
+
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
+
+sift_least = least %>% head(3)
+
+word_list1 = c(most_freq_word, sift_least)
+
+data_2 <- read.csv("../data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
   ggplot()+
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")
+    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Books")
+
 ```
 
-This is our first draft and we plan to complete it in the next few days.
+### Camera
+
+- Customers are more sensitive to the price and the quality of taking pictures.
+```{r, echo = F}
+data_2 <- read.csv("../data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
+
+
+data_2$star_rating <- data_2$star_rating %>% factor
+
+data_2$star_rating <- str_c("star_",data_2$star_rating)
+
+noun <- udpipe_annotate(udmodel, 
+                     unique(data_2$word.stem)) %>% 
+  as.data.frame() %>% 
+  select(token, upos) %>% filter(upos == "NOUN") %>% unlist
+
+data_3 <- data_2 %>% filter(word.stem %in% noun) %>% 
+  group_by(word.stem) %>%
+  summarise(all_freq = sum(frequency)) 
+
+data_4 <- data_2 %>% select(-X) %>% 
+  spread(star_rating, frequency)
+
+
+
+
+
+most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
+  head(3)
+
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
+
+sift_least = least %>% head(3)
+
+word_list1 = c(most_freq_word, sift_least)
+
+data_2 <- read.csv("../data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
+data_2$star_rating <- data_2$star_rating %>% factor
+data_2 %>%
+  filter(word.stem %in% word_list1) %>% 
+  ggplot()+
+    geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
+    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Cameras")
+
+```
+
+### Digital_Ebook_Purchase
+
+- The vital elements are almost the same as paper books, such as stories and plots.
+
+```{r, echo = F}
+data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
+
+
+data_2$star_rating <- data_2$star_rating %>% factor
+
+data_2$star_rating <- str_c("star_",data_2$star_rating)
+
+noun <- udpipe_annotate(udmodel, 
+                     unique(data_2$word.stem)) %>% 
+  as.data.frame() %>% 
+  select(token, upos) %>% filter(upos == "NOUN") %>% unlist
+
+data_3 <- data_2 %>% filter(word.stem %in% noun) %>% 
+  group_by(word.stem) %>%
+  summarise(all_freq = sum(frequency)) 
+
+data_4 <- data_2 %>% select(-X) %>% 
+  spread(star_rating, frequency)
+
+
+most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
+  head(3)
+
+least = data_4$word.stem[data_4$star_5<data_4$star_3] 
+
+sift_least = least %>% head(3)
+
+word_list1 = c(most_freq_word, sift_least)
+
+data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
+data_2$star_rating <- data_2$star_rating %>% factor
+data_2 %>%
+  filter(word.stem %in% word_list1) %>% 
+  ggplot()+
+    geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
+    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Digital_Ebook_Purchase")
+```
+
+### Electronics
+
+- Good qualities are quite significant when it comes to electronics.
+
+```{r, echo = F}
+data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
+
+
+data_2$star_rating <- data_2$star_rating %>% factor
+
+data_2$star_rating <- str_c("star_",data_2$star_rating)
+
+noun <- udpipe_annotate(udmodel, 
+                     unique(data_2$word.stem)) %>% 
+  as.data.frame() %>% 
+  select(token, upos) %>% filter(upos == "NOUN") %>% unlist
+
+data_3 <- data_2 %>% filter(word.stem %in% noun) %>% 
+  group_by(word.stem) %>%
+  summarise(all_freq = sum(frequency)) 
+
+data_4 <- data_2 %>% select(-X) %>% 
+  spread(star_rating, frequency)
+
+
+most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
+  head(3)
+
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
+
+sift_least = least %>% head(3)
+
+word_list1 = c(most_freq_word, sift_least)
+
+data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
+data_2$star_rating <- data_2$star_rating %>% factor
+data_2 %>%
+  filter(word.stem %in% word_list1) %>% 
+  ggplot()+
+    geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
+    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Electronics")
+
+```
+
+### Mobile_Apps
+
+- Customers tend to pay more attention to advertisements and games in mobile Apps, business owners should sell more interesting Apps.
+
+```{r, echo = F}
+data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
+
+
+data_2$star_rating <- data_2$star_rating %>% factor
+
+data_2$star_rating <- str_c("star_",data_2$star_rating)
+
+noun <- udpipe_annotate(udmodel, 
+                     unique(data_2$word.stem)) %>% 
+  as.data.frame() %>% 
+  select(token, upos) %>% filter(upos == "NOUN") %>% unlist
+
+data_3 <- data_2 %>% filter(word.stem %in% noun) %>% 
+  group_by(word.stem) %>%
+  summarise(all_freq = sum(frequency)) 
+
+data_4 <- data_2 %>% select(-X) %>% 
+  spread(star_rating, frequency)
+
+
+most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
+  head(3)
+
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
+
+sift_least = least %>% head(3)
+
+word_list1 = c(most_freq_word, sift_least)
+
+data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
+data_2$star_rating <- data_2$star_rating %>% factor
+data_2 %>%
+  filter(word.stem %in% word_list1) %>% 
+  ggplot()+
+    geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
+    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Mobile_Apps")
+```
+
+### Digital_Video_Download
+```{r, echo = F}
+data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
+
+
+data_2$star_rating <- data_2$star_rating %>% factor
+
+data_2$star_rating <- str_c("star_",data_2$star_rating)
+
+noun <- udpipe_annotate(udmodel, 
+                     unique(data_2$word.stem)) %>% 
+  as.data.frame() %>% 
+  select(token, upos) %>% filter(upos == "NOUN") %>% unlist
+
+data_3 <- data_2 %>% filter(word.stem %in% noun) %>% 
+  group_by(word.stem) %>%
+  summarise(all_freq = sum(frequency)) 
+
+data_4 <- data_2 %>% select(-X) %>% 
+  spread(star_rating, frequency)
+
+
+most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
+  head(3)
+
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
+
+sift_least = least %>% head(3)
+
+word_list1 = c(most_freq_word, sift_least)
+
+data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
+data_2$star_rating <- data_2$star_rating %>% factor
+data_2 %>%
+  filter(word.stem %in% word_list1) %>% 
+  ggplot()+
+    geom_bar(aes(x = star_rating,y = frequency,fill = star_rating,),stat = "identity")+
+    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Digital_Video_Download")
+```
+
+
+
+# 3 Conclusion
+
+From this project, conventional wisdom has it that customers will focus more on certain characteristics of merchandise, based on which they review and star the goods. So the sentiment analysis of reviews will be of vital importance to either customers or business owners. After finding out the reasons why are there good reviews or bad reviews concerning the high-frequency words and rating stars, we make suggestions to the merchant for the sake of improving their strategies according to consumers' behaviors and preferences. Apart from that, more analysis of data from different months or seasons is left to be done, from which business owners can benefit a lot.
 
 
 
