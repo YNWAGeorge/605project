@@ -42,7 +42,7 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 (pre 1)     split.sh
                 |
                 V         
-(job 1)     word_freq.sub
+(job 1)   word_freq.sub
 (need "packages.tar.gz" from install_R.sh)
               / | \      
 120 parallels running "word_freq.sh"
