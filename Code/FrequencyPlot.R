@@ -13,7 +13,7 @@ library(ggplot2)
 udmodel <- udpipe_download_model(language = "english")
 udmodel <- udpipe_load_model(file = udmodel$file_model)
 
-data_2 <- read.csv("../Data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
+data_2 <- read.csv("../data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
 
 
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -42,7 +42,7 @@ sift_least = least %>% head(3)
 
 word_list1 = c(most_freq_word, sift_least)
 
-data_2 <- read.csv("../Data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
+data_2 <- read.csv("../data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
@@ -57,7 +57,7 @@ ggsave(
 
 
 
-data_2 <- read.csv("../Data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
+data_2 <- read.csv("../data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
 
 
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -89,7 +89,7 @@ sift_least = least %>% head(3)
 
 word_list1 = c(most_freq_word, sift_least)
 
-data_2 <- read.csv("../Data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
+data_2 <- read.csv("../data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
@@ -103,7 +103,7 @@ ggsave(
 )
 dev.off()
 
-data_2 <- read.csv("../Data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
+data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
 
 
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -132,7 +132,7 @@ sift_least = least %>% head(3)
 
 word_list1 = c(most_freq_word, sift_least)
 
-data_2 <- read.csv("../Data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
+data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
@@ -146,7 +146,7 @@ ggsave(
 )
 dev.off()
 
-data_2 <- read.csv("../Data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
+data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
 
 
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -175,7 +175,7 @@ sift_least = least %>% head(3)
 
 word_list1 = c(most_freq_word, sift_least)
 
-data_2 <- read.csv("../Data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
+data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
@@ -189,7 +189,7 @@ ggsave(
 )
 dev.off()
 
-data_2 <- read.csv("../Data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
+data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
 
 
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -218,7 +218,7 @@ sift_least = least %>% head(3)
 
 word_list1 = c(most_freq_word, sift_least)
 
-data_2 <- read.csv("../Data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
+data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
@@ -232,7 +232,7 @@ ggsave(
 )
 dev.off()
 
-data_2 <- read.csv("../Data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
+data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
 
 
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -261,7 +261,7 @@ sift_least = least %>% head(3)
 
 word_list1 = c(most_freq_word, sift_least)
 
-data_2 <- read.csv("../Data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
+data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
