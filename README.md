@@ -41,7 +41,6 @@ install.packages("stringr")
 
 
 ## File Description in Code Folder
-<!-- - [data_cleaning.py](code/data_cleaning.py) - Python code for cleaning the text data. Include sifting text based on its content, removing symbols and lemmatization. -->
 
 
 
