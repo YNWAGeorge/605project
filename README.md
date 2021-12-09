@@ -28,7 +28,8 @@ Run `install_R.sh` to get the packages.
 
 ## File Description in Code Folder
 
-
+- `kaggle_download.sh`: to download data files from kaggle. You may need a kaggle account and an api.
+- `install_R.sh`: to install packages that are needed.
 - `split.sh`: to split tsv file into tens of small tsv files, each 100MB.
 - `checklist.sh`: to find all the files that split from raw data.
 - `word_freq.R/.sub`: to calculate on these files in parallel and count the word frequency.
