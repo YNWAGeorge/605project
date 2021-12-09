@@ -37,17 +37,19 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 - `FrequencyPlot.R`: to get plots based on output of word couting.
 
 
+## Work Structure in projectCHTC
+
  (pre 1)   split.sh
  
               |
               
               V
               
- (job 1)  word_freq.sub
+ (job 1)  word_freq.sub (need "packages.tar.gz" from install_R.sh)
  
             / | \
             
-   tens fo parallel runs of word_freq.sh
+ tens fo parallel runs of word_freq.sh
    
             \ | /
             
