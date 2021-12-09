@@ -34,7 +34,7 @@ Run `install_R.sh` to get the packages.
 - `checklist.sh`: to find all the files that split from raw data.
 - `word_freq.R/.sub`: to calculate on these files in parallel and count the word frequency.
 - `save.sh`: to save the word counts files.
-- 
+- `FrequencyPlot.R`: to get plots based on output of word couting.
 
 
 
