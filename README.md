@@ -38,8 +38,7 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 
 
 ## Work Structure in projectCHTC
-
- (pre 1)   split.sh
+'(pre 1)   split.sh
  
               |
               
@@ -55,8 +54,7 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
             
               V
               
- (post 1) merge.sh
-
+ (post 1) merge.sh'
 
 
 
