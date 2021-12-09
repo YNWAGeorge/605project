@@ -1,5 +1,5 @@
 ---
-title: "report"
+title: "Amazon Data Analysis Report"
 author: "Tinghui Xu, Ouyang Xu, Bowen Tian, Yijin Guan, Yifan Du"
 date: "12/3/2021"
 output: html_document
@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-More details can be seen on our [GitHub repository](https://github.com/YNWAGeorge/STAT605GroupProject).
+More details can be seen on our [GitHub repository](https://github.com/YNWAGeorge/605project).
 
 
 # 1 Introduction
