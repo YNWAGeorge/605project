@@ -42,6 +42,8 @@ install.packages("stringr")
 
 ## File Description in Code Folder
 
+- `split.sh`
+
 
 
 
