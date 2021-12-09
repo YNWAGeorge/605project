@@ -42,7 +42,12 @@ install.packages("stringr")
 
 ## File Description in Code Folder
 
-- `split.sh`
+
+- `split.sh`: to split tsv file into tens of small tsv files, each 100MB.
+- `checklist.sh`: to find all the files that split from raw data.
+- `word_freq.R/.sub`: to calculate on these files in parallel and count the word frequency.
+- `save.sh`: to save the word counts files.
+- 
 
 
 
