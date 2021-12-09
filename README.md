@@ -22,7 +22,7 @@ Amazon is the online retailer with the largest variety of products in the world.
 - [R 4.0+](https://www.r-project.org/)
 
 ## Installation
-These commands assume that your Python version is 3.6+ and basic Machine Learning modules are already installed.
+These commands assume that your R version is 4.0+ and basic Machine Learning modules are already installed.
 It may be available as `pip` depending on how your system is configured.
 ```bash
 # [OPTIONAL] Activate a virtual environment
