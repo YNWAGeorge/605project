@@ -23,7 +23,7 @@ Amazon is the online retailer with the largest variety of products in the world.
 
 ## Installation
 
-Run `install_R.sh` on CHTC to get the packages. You may need a kaggle account and an api.
+Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need to install these packages again in the following parallel computation. You may need a kaggle account and an api.
 
 
 ## File Description in Code Folder
