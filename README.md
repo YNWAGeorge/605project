@@ -23,19 +23,39 @@ Amazon is the online retailer with the largest variety of products in the world.
 
 ## Installation
 
-Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need to install these packages again in the following parallel computation. You may need a kaggle account and an api.
+Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need to install these packages again in the following parallel computation. Also, to download the dataset form Kaggle, you may need a kaggle account and an api.
 
 
 ## File Description in Code Folder
 
 - `kaggle_download.sh`: to download data files from kaggle. You may need a kaggle account and an api.
 - `install_R.sh`: to install packages that are needed.
-- `split.sh`: to split tsv file into tens of small tsv files, each 100MB.
-- `checklist.sh`: to find all the files that split from raw data.
-- `word_freq.R/.sub`: to calculate on these files in parallel and count the word frequency.
-- `save.sh`: to save the word counts files.
+- `split.sh`: to split all the tsv files into tens of small tsv files, each 100MB. And then, it will return a list of all the small files, named as "file_list".
+- `word_freq.sub/.sh/.R`: to calculate on these files in parallel. It will do the tokenization and lemmatizaiton and then count the word frequency in each small tsv files.
+- `merge.sh`: to merge all the small tsv files into one csv file.
+- `aggregate.R`:to aggregate the csv files accroding to "product_category", "word.stem", and "star_rating". 
 - `FrequencyPlot.R`: to get plots based on output of word couting.
 
+
+## Work Structure in projectCHTC
+
+ (pre 1)   split.sh
+ 
+              |
+              
+              V
+              
+ (job 1)  word_freq.sub (need "packages.tar.gz" from install_R.sh)
+ 
+            / | \
+            
+ tens fo parallel runs of word_freq.sh
+   
+            \ | /
+            
+              V
+              
+ (post 1) merge.sh
 
 
 
