@@ -1,4 +1,4 @@
-rm(list = ls())
+# rm(list = ls())
 
 library(tidytext)
 library(tidyr)
@@ -20,8 +20,7 @@ data_2$star_rating <- data_2$star_rating %>% factor
 
 data_2$star_rating <- str_c("star_",data_2$star_rating)
 
-noun <- udpipe_
-annotate(udmodel, 
+noun <- udpipe_annotate(udmodel, 
                      unique(data_2$word.stem)) %>% 
   as.data.frame() %>% 
   select(token, upos) %>% filter(upos == "NOUN") %>% unlist
@@ -84,8 +83,11 @@ data_4 <- data_2 %>% select(-X) %>%
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
   head(3)
 
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
 
-word_list1 = most_freq_word
+sift_least = least %>% head(3)
+
+word_list1 = c(most_freq_word, sift_least)
 
 data_2 <- read.csv("../data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -124,9 +126,11 @@ data_4 <- data_2 %>% select(-X) %>%
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
   head(3)
 
+least = data_4$word.stem[data_4$star_5<data_4$star_3] 
 
+sift_least = least %>% head(3)
 
-word_list1 = most_freq_word
+word_list1 = c(most_freq_word, sift_least)
 
 data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -165,9 +169,11 @@ data_4 <- data_2 %>% select(-X) %>%
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
   head(3)
 
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
 
+sift_least = least %>% head(3)
 
-word_list1 = most_freq_word
+word_list1 = c(most_freq_word, sift_least)
 
 data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -206,9 +212,11 @@ data_4 <- data_2 %>% select(-X) %>%
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
   head(3)
 
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
 
+sift_least = least %>% head(3)
 
-word_list1 = most_freq_word
+word_list1 = c(most_freq_word, sift_least)
 
 data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -247,9 +255,11 @@ data_4 <- data_2 %>% select(-X) %>%
 most_freq_word <- data_3$word.stem[order(data_3$all_freq,decreasing = T)] %>% 
   head(3)
 
+least = data_4$word.stem[data_4$star_5<data_4$star_1] 
 
+sift_least = least %>% head(3)
 
-word_list1 = most_freq_word
+word_list1 = c(most_freq_word, sift_least)
 
 data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
 data_2$star_rating <- data_2$star_rating %>% factor
