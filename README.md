@@ -19,7 +19,6 @@ Amazon is the online retailer with the largest variety of products in the world.
 
 ***
 ## Dependencies
-- [Python 3.6+](https://www.python.org/)
 - [R 4.0+](https://www.r-project.org/)
 
 ## Installation
@@ -32,13 +31,12 @@ pip install nltk
 ```
 This project depends upon a knowledge of  the packages in R, you can install with:
 ```
-install.packages("car")
-install.packages("tidyverse")
-install.packages("caret")
-install.packages("broom")
-install.packages("MVA")
-install.packages("biwt")
-install.packages("robustbase")
+install.packages("tidytext")
+install.packages("dplyr")
+install.packages("SnowballC")
+install.packages("tidyr")
+install.packages("readr")
+install.packages("stringr")
 ```
 
 
@@ -59,5 +57,7 @@ This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John 
 - **Tinghui Xu** - (txu98@wisc.edu) : Contribute to 
 
 - **Yijin Guan** - (yguan37@wisc.edu) : Contribute to
+
+- **Yifan Du** - (ydu76@wisc.edu) : Contribute to
 
 
