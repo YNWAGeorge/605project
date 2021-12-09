@@ -22,22 +22,8 @@ Amazon is the online retailer with the largest variety of products in the world.
 - [R 4.0+](https://www.r-project.org/)
 
 ## Installation
-These commands assume that your R version is 4.0+ and basic Machine Learning modules are already installed.
-It may be available as `pip` depending on how your system is configured.
-```bash
-# [OPTIONAL] Activate a virtual environment
-pip install pyldavis
-pip install nltk
-```
-This project depends upon a knowledge of  the packages in R, you can install with:
-```
-install.packages("tidytext")
-install.packages("dplyr")
-install.packages("SnowballC")
-install.packages("tidyr")
-install.packages("readr")
-install.packages("stringr")
-```
+
+Run `install_R.sh` to get the packages.
 
 
 ## File Description in Code Folder
