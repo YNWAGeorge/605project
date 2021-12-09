@@ -1,0 +1,4 @@
+job 1 word_freq.sub
+
+script pre 1 split.sh
+script post 1 merge.sh

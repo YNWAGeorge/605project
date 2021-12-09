@@ -21,8 +21,8 @@ require('stringr')
 
 
 data <- read_tsv(filename,col_names = F,skip = 1)
-data <- data %>% select(X7,X8,X14,X3)
-colnames(data) <- c("product_category","star_rating","review_body","review_id")
+data <- data %>% select(X7,X8,X14)
+colnames(data) <- c("product_category","star_rating","review_body")
 #remove css 
 data$review_body <- data$review_body%>% 
   str_remove_all("<.{1,5}>") %>% 
@@ -48,4 +48,4 @@ term_table <- data_1 %>%
   group_by(product_category,star_rating,word.stem) %>% 
   summarise(number = n())
 
-write.csv(term_table,paste0(filename,".csv"))
+write.csv(term_table,paste0(filename,".csv"),row.names = F)

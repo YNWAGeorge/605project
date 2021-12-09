@@ -8,14 +8,14 @@ output = output/word_$(Cluster)_$(Process).out
 
 
 executable = ./word_freq.sh
-arguments = $(tsv)
+arguments = $(file)
 
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-transfer_input_files = http://proxy.chtc.wisc.edu/SQUID/chtc/R402.tar.gz, packages.tar.gz, word_freq.R,file_list, $(tsv)
+transfer_input_files = http://proxy.chtc.wisc.edu/SQUID/chtc/R402.tar.gz, packages.tar.gz, word_freq.R,file_list, $(file)
 
 request_cpus = 1
 request_memory = 5GB
 request_disk = 5GB
 
-queue tsv from file_list
+queue file from file_list

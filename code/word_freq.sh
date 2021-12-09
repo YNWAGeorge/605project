@@ -12,3 +12,4 @@ export R_LIBS=$PWD/packages
 
 # run your script
 Rscript word_freq.R $1
+
