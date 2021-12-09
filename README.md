@@ -38,24 +38,17 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 
 
 ## Work Structure in projectCHTC
-'(pre 1)   split.sh
- 
+```
+ (pre 1)   split.sh
               |
-              
-              V
-              
+              V         
  (job 1)  word_freq.sub (need "packages.tar.gz" from install_R.sh)
- 
-            / | \
-            
+            / | \      
  tens fo parallel runs of word_freq.sh
-   
             \ | /
-            
-              V
-              
- (post 1) merge.sh'
-
+              V   
+ (post 1) merge.sh
+```
 
 
 ## Acknowledgements
