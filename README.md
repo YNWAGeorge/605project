@@ -11,7 +11,7 @@ Amazon is the online retailer with the largest variety of products in the world.
   - [File Description in Code Folder](#file-description-in-code-folder)
 
   
-  - [Acknowledgements](#acknowledgements)
+  - [Acknowledgments](#acknowledgments)
 
   
   - [Contributors](#contributors)
@@ -23,7 +23,7 @@ Amazon is the online retailer with the largest variety of products in the world.
 
 ## Installation
 
-Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need to install these packages again in the following parallel computation. Also, to download the dataset form Kaggle, you may need a kaggle account and an api.
+Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need to install these packages again in the following parallel computation. Also, to download the dataset form Kaggle, you may need a kaggle account and then run `kaggle_download.sh` along with the API.
 
 
 ## File Description in Code Folder
@@ -36,6 +36,28 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 - `aggregate.R`:to aggregate the csv files accroding to "product_category", "word.stem", and "star_rating". 
 - `FrequencyPlot.R`: to get plots based on output of word couting.
 
+
+## Variables
+The dataset contains a collection of reviews written in the Amazon.com marketplace and associated metadata from 1995 until 2015. There are 15 variables in our data set.
+
+
+| Variable Names | Description |
+| --- | ------------ |
+| marketplace | 2 letter country code of the marketplace where the review was written. |
+| customer_id | Random identifier that can be used to aggregate reviews written by a single author. |
+| review_id | The unique ID of the review. |
+| productid | The unique Product ID the review pertains to. In the multilingual dataset the reviews for the same product in different countries can be grouped by the same productid. |
+| product_parent | Random identifier that can be used to aggregate reviews for the same product. |
+| product_title | Title of the product. |
+| product_category | Broad product category that can be used to group reviews. |
+| star_rating | The 1-5 star rating of the review. |
+| helpful_votes | Number of helpful votes. |
+| total_votes | Number of total votes the review received. |
+| vine | Review was written as part of the Vine program. |
+| verified_purchase | The review is on a verified purchase. |
+| review_headline | The title of the review. |
+| review_body | The review text. |
+| review_date | The date the review was written. |
 
 ## Work Structure in projectCHTC
 ```
@@ -52,7 +74,7 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 ```
 
 
-## Acknowledgements
+## Acknowledgments
 This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John Gillett.
 
 
