@@ -87,6 +87,6 @@ This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John 
 
 - **Yijin Guan** - (yguan37@wisc.edu) : Contribute to
 
-- **Yifan Du** - (ydu76@wisc.edu) : Contribute to
+- **Yifan Du** - (ydu76@wisc.edu) : Contribute to proposal, first draft, report and part of R codes for analysis.
 
 
