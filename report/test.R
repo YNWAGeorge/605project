@@ -1,3 +1,17 @@
+library(tidytext)
+library(dplyr)
+library(readr)
+library(tm)
+library(SnowballC)
+library(stringr)
+library(knitr)
+library(udpipe)
+library(tidyr)
+library(ggplot2)
+
+udmodel <- udpipe_download_model(language = "english")
+udmodel <- udpipe_load_model(file = udmodel$file_model)
+
 data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "videodownload")
 
 
@@ -36,12 +50,11 @@ data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & w
 data_2$star_rating <- data_2$star_rating %>% factor
 data_2 %>%
   filter(word.stem %in% word_list1) %>% 
-  ggplot()+
-    geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")
+  ggplot(main="terrain.colors")+
+    geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")
 
-ggsave(
-  "../image/videodownload.png",
-  dpi = 500
-)
+# ggsave(
+#   "../image/videodownload.png",
+#   dpi = 500
+# )
 dev.off()

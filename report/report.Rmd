@@ -97,11 +97,10 @@ data_4 <- data_2 %>% select(-X) %>%
 
 kable(data_4[13:17, -1])
 ```
-Next, we are going to give suggestions to particular business owners about what they are ought to do in light of the marked words related to stars.
 
-### Book
+Therefore, we have made the figures that show the most valuable words within the reviews:
 
-- The stories and writers are important to readers so we suggest to sell popular and intriguing books.
+
 ```{r, echo = F}
 data_2 <- read.csv("../data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
 
@@ -142,9 +141,7 @@ data_2 %>%
 
 ```
 
-### Camera
 
-- Customers are more sensitive to the price and the quality of taking pictures.
 ```{r, echo = F}
 data_2 <- read.csv("../data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
 
@@ -188,9 +185,6 @@ data_2 %>%
 
 ```
 
-### Digital_Ebook_Purchase
-
-- The vital elements are almost the same as paper books, such as stories and plots.
 
 ```{r, echo = F}
 data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
@@ -231,9 +225,7 @@ data_2 %>%
     facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Digital_Ebook_Purchase")
 ```
 
-### Electronics
 
-- Good qualities are quite significant when it comes to electronics.
 
 ```{r, echo = F}
 data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
@@ -275,9 +267,7 @@ data_2 %>%
 
 ```
 
-### Mobile_Apps
 
-- Customers tend to pay more attention to advertisements and games in mobile Apps, business owners should sell more interesting Apps.
 
 ```{r, echo = F}
 data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
@@ -318,7 +308,7 @@ data_2 %>%
     facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Mobile_Apps")
 ```
 
-### Digital_Video_Download
+
 ```{r, echo = F}
 data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
 
@@ -358,7 +348,31 @@ data_2 %>%
     facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Digital_Video_Download")
 ```
 
+From above plots, we are going to give suggestions to particular business owners respectively about what they are ought to do in light of the marked words related to stars.
 
+### Book
+
+- The stories and writers are important to readers so we suggest to sell popular and intriguing books.
+
+### Camera
+
+- Customers are more sensitive to the price and the quality of taking pictures.
+
+### Digital_Ebook_Purchase
+
+- The vital elements are almost the same as paper books, such as stories and plots.
+
+### Electronics
+
+- Good qualities are quite significant when it comes to electronics.
+
+### Mobile_Apps
+
+- Customers tend to pay more attention to advertisements and games in mobile Apps, business owners should sell more interesting Apps.
+
+### Digital_Video_Download
+
+- The boring videos are more likely to get low stars and the story is essential to customers.
 
 # 3 Conclusion
 
