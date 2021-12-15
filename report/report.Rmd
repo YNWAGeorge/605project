@@ -16,7 +16,7 @@ More details can be seen on our [GitHub repository](https://github.com/YNWAGeorg
 # 1 Introduction
 
 
-As we all know, Amazon is the online retailer with the largest variety of products in the world. It's meaningful for either customers or business owners to know more about the reviews of the items. Our main goal is to explore which aspects are mostly mentioned. This can help sellers improve their stars. So we use CHTC/HPC to find the relationship between the high-frequency words and rating stars.
+As we all know, Amazon is the online retailer with the largest variety of products in the world. It's meaningful for both customers and business owners to know more about the reviews of the items. Our main goal is to explore which aspects are mostly mentioned. This can help sellers improve their stars. So we use CHTC/HPC to find the relationship between the high-frequency words and rating stars.
 
 
 # 2 Methodology
@@ -25,7 +25,7 @@ As we all know, Amazon is the online retailer with the largest variety of produc
 ## 2.1 Description of data
 
 
-Our Amazon dataset can be obtained from [Kaggle's Amazon US Customer Reviews Dataset](https://www.kaggle.com/cynthiarempel/amazon-us-customer-reviews-dataset). Amazon is founded in 1994 and it developed to be the largest integrated online retailer in 1997. In a period of over two decades since the first review in 1995, millions of Amazon customers have contributed more than a hundred million reviews to express opinions and describe their experiences regarding products on the Amazon.com website. This makes Amazon Customer Reviews a rich source of information for academic researchers in the fields of Natural Language Processing (NLP), Information Retrieval (IR), and Machine Learning (ML), amongst others. Our dataset contains 6 subfiles. Each file contains the sales records and comments of a certain category of goods in the US. Each data file has 15 columns containing variables like 'product_category', 'star_rating', and 'review_body' etc. And there are 22175051 reviews in our data set.
+Our Amazon dataset can be obtained from [Kaggle's Amazon US Customer Reviews Dataset](https://www.kaggle.com/cynthiarempel/amazon-us-customer-reviews-dataset). Amazon was founded in 1994 and it developed to be the largest integrated online retailer in 1997. In a period of over two decades since the first review in 1995, millions of Amazon customers have contributed more than a hundred million reviews to express opinions and describe their experiences regarding products on the Amazon.com website. This makes Amazon Customer Reviews a rich source of information for academic researchers in the fields of Natural Language Processing (NLP), Information Retrieval (IR), and Machine Learning (ML), amongst others. Our dataset contains 6 subfiles. Each file contains the sales records and comments of a certain category of goods in the US. Each data file has 15 columns containing variables like 'product_category', 'star_rating', and 'review_body' etc. And there are 22175051 reviews in our data set.
 
 
 ```{r, echo = F, message = F, warning = F}
@@ -39,6 +39,7 @@ library(knitr)
 library(udpipe)
 library(tidyr)
 library(ggplot2)
+library(unikn)
 udmodel <- udpipe_download_model(language = "english")
 udmodel <- udpipe_load_model(file = udmodel$file_model)
 
@@ -50,19 +51,18 @@ udmodel <- udpipe_load_model(file = udmodel$file_model)
 
 ## 2.2 Data processing
 
-First, we use a bash file named "split.sh" to split all 6 tsv files into tens of small tsv files, each 100MB. Then we run "word_freq_array.sh" to access these files to do the parallel computation for each category. Finally, "merge.sh" merges all the csv files into a combined csv file using the given category.
+We use R in CHTC to do parallel computation. We use "install_R.sh" and "interactive.sub" to download all the R packages we need and compress them to "packages.tar.gz" so that we do not need to download R packages again in future parallel jobs. 
 
-For example, we split the camera.tsv (1.1GB) into 11 small tsv files. After that, we run "word_freq_array_camera.sh" to launch 11 small jobs. Each job does the tokenization and lemmatization to each csv file, and then calculates the frequency of each word, returning a csv file with Column word, star_ratings, and frequency. Then, a bash file named "merge.sh" merges all these csv files about the camera into one csv file. 
-
-At last, we got 6 combined csv files for further analysis, which were done locally.
+Then we start our main procedures of parallel computation. First, we use a bash file named "split.sh" to split all 6 tsv files into 124 small tsv files, each no greater than 100MB. It also finds all the 124 small files and compile the file names to a list named as "file_list". Next, we pass the "file_list" and "packages.tar.gz" to "word_freq.sub" to launch 124 parallel jobs in 124 computer nodes.  For each job, we use "word_freq.sh" and "word_freq.R" to do the text preprocessing and computation for words frequency, which will be elaborated in the Text Processing and  Computation for words frequency part. Each job returns a csv file recording the words frequency results. Each job takes 5-10 minutes to run and requires 5GB memory and 5GB disk space. Then, a bash file named "merge.sh" merges all the 124 returned csv files into one csv file. All the main procedures mentioned above are included in the "submit.dag" and we only need to run this dag file. Next, we will introduce what we do in each parallel job.
 
 ## 2.3 Text processing
 
-In order to make our result and conclusion more precise, we do some work before we do tokenization on the customers' reviews. First, we remove all of the punctuation and some html elements like *\<br/>* and *\&#34;*. Then we turn each letter into lower-case letters and do lemmatization, which can transform words like 'swims', 'swam', 'swimming' to 'swim'. After this, we do tokenization to separate the strings into single words. At last, we remove all the stop words to get our final word boxes. 
+We do the text processing in each parallel job. In order to make our result and conclusion more precise, we do some work before we do tokenization on the customers' reviews. First, we remove all of the punctuation and some html elements like *\<br/>* and *\&#34;*. Then we turn each letter into lower-case letters and do lemmatization, which can transform words like 'swims', 'swam', 'swimming' to 'swim'. After this, we do tokenization to separate the strings into single words. At last, we remove all the stop words to get our final word boxes.  
 
 ## 2.4 Computation for words frequency
 
-We grouped our word boxes to get words frequency results. Since we split the raw data, we extracted top 2000 words in each split file and merge them into one .csv file. Then we select all the nouns from the words we get. We do these on each of the 6 sub files since they are different product categories.
+In each of the 124 split csv files, we group our word boxes and calculate frequency for each word. Then we extract 2000 words with the highest frequency and keep the nouns from the 2000 words in each csv file with Column "product_category", "word.stem", "star_ratings", and "frequency".. Then we merge them to one csv file as we mention in 2.2. Parts of the csv file we get are as follows:   
+
 ### book
 ```{r, echo = F}
 data_2 <- read.csv("../Data/book.csv") %>% filter(word.stem != "br" & word.stem != "book")
@@ -80,7 +80,7 @@ kable(data_2[13:17, -1])
 
 ## 2.5 Word frequency v.s. Star rating plot
 
-In 2.4, when we are getting words frequency, we keep the star rating and the product category of the reviews where certain words are split from. So we have the relationship between high-frequency words and star ratings. And we can intuitively analyze some of the interesting words and based on these we can make suggestions or predictions.
+After the computation on CHTC, we can do further analysis on the merged csv file in our local computers. In 2.4, when we are getting words frequency, we keep the star rating and the product category of the reviews where certain words are split from. Therefore, we can tansform the data structure and get the relationship between high-frequency words and star ratings. Then we can intuitively analyze some of the interesting words and based on these we can make suggestions or predictions. Parts of the data structure after transformation are as follows:
 
 ```{r, echo = F}
 noun <- udpipe_annotate(udmodel, 
@@ -129,7 +129,7 @@ least = data_4$word.stem[data_4$star_5<data_4$star_1]
 
 sift_least = least %>% head(3)
 
-word_list1 = c(most_freq_word, sift_least)
+word_list1 = c(as.character(most_freq_word), as.character(sift_least))
 
 data_2 <- read.csv("../data/book.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "book")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -137,7 +137,7 @@ data_2 %>%
   filter(word.stem %in% word_list1) %>% 
   ggplot()+
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Books")
+    facet_wrap(~word.stem,scales = "free")+ggtitle("Figure 1: Books")+scale_fill_manual(values = as.character(pal_seeblau[1:5]))
 
 ```
 
@@ -173,7 +173,7 @@ least = data_4$word.stem[data_4$star_5<data_4$star_1]
 
 sift_least = least %>% head(3)
 
-word_list1 = c(most_freq_word, sift_least)
+word_list1 = c(as.character(most_freq_word), as.character(sift_least))
 
 data_2 <- read.csv("../data/camera.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "camera")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -181,7 +181,7 @@ data_2 %>%
   filter(word.stem %in% word_list1) %>% 
   ggplot()+
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Cameras")
+    facet_wrap(~word.stem,scales = "free")+ggtitle("Figure 2: Cameras")+scale_fill_manual(values = as.character(pal_peach[1:5]))
 
 ```
 
@@ -214,7 +214,7 @@ least = data_4$word.stem[data_4$star_5<data_4$star_3]
 
 sift_least = least %>% head(3)
 
-word_list1 = c(most_freq_word, sift_least)
+word_list1 = c(as.character(most_freq_word), as.character(sift_least))
 
 data_2 <- read.csv("../data/Ebook.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Ebook")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -222,7 +222,7 @@ data_2 %>%
   filter(word.stem %in% word_list1) %>% 
   ggplot()+
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Digital_Ebook_Purchase")
+    facet_wrap(~word.stem,scales = "free")+ggtitle("Figure 3:  Digital Ebook Purchase")+scale_fill_manual(values = as.character(pal_grau[1:5]))
 ```
 
 
@@ -255,7 +255,7 @@ least = data_4$word.stem[data_4$star_5<data_4$star_1]
 
 sift_least = least %>% head(3)
 
-word_list1 = c(most_freq_word, sift_least)
+word_list1 = c(as.character(most_freq_word), as.character(sift_least))
 
 data_2 <- read.csv("../data/Electronics.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Electronics")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -263,7 +263,7 @@ data_2 %>%
   filter(word.stem %in% word_list1) %>% 
   ggplot()+
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Electronics")
+    facet_wrap(~word.stem,scales = "free")+ggtitle("Figure 4: Electronics")+scale_fill_manual(values = as.character(pal_pinky[1:5]))
 
 ```
 
@@ -297,7 +297,7 @@ least = data_4$word.stem[data_4$star_5<data_4$star_1]
 
 sift_least = least %>% head(3)
 
-word_list1 = c(most_freq_word, sift_least)
+word_list1 = c(as.character(most_freq_word), as.character(sift_least))
 
 data_2 <- read.csv("../data/Mobile.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "Mobile")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -305,7 +305,7 @@ data_2 %>%
   filter(word.stem %in% word_list1) %>% 
   ggplot()+
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Mobile_Apps")
+    facet_wrap(~word.stem,scales = "free")+ggtitle("Figure 5: Mobile Apps")+scale_fill_manual(values = as.character(pal_seegruen[1:5]))
 ```
 
 
@@ -337,7 +337,7 @@ least = data_4$word.stem[data_4$star_5<data_4$star_1]
 
 sift_least = least %>% head(3)
 
-word_list1 = c(most_freq_word, sift_least)
+word_list1 = c(as.character(most_freq_word), as.character(sift_least))
 
 data_2 <- read.csv("../data/videodownload.csv") %>% filter(word.stem != "br" & word.stem != "aw" & word.stem != "videodownload")
 data_2$star_rating <- data_2$star_rating %>% factor
@@ -345,7 +345,7 @@ data_2 %>%
   filter(word.stem %in% word_list1) %>% 
   ggplot()+
     geom_bar(aes(x = star_rating,y = frequency,fill = star_rating,),stat = "identity")+
-    facet_wrap(~word.stem,scales = "free")+ggtitle("the 6 valuable words within reviews in the category of Digital_Video_Download")
+    facet_wrap(~word.stem,scales = "free")+ggtitle("Figure 6: Digital Video Download")+scale_fill_manual(values = as.character(pal_bordeaux[1:5]))
 ```
 
 From above plots, we are going to give suggestions to particular business owners respectively about what they are ought to do in light of the marked words related to stars.
