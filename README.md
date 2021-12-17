@@ -83,7 +83,7 @@ This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John 
 
 - **Ouyang Xu** - (oxu2@wisc.edu) : Contribute to 
 
-- **Tinghui Xu** - (txu98@wisc.edu) : Contribute to CHTC computation, R codes for analysis, the first draft and the final report.
+- **Tinghui Xu** - (txu98@wisc.edu) : Contribute to CHTC computation, R codes for analysis, the first draft, and the final report.
 
 - **Yijin Guan** - (yguan37@wisc.edu) : Contribute to
 
