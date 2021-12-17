@@ -8,7 +8,7 @@ Amazon is the online retailer with the largest variety of products in the world.
 
   - [Installation](#installation)
 
-  - [File Description in Code Folder](#file-description-in-code-folder)
+  - [Description](#description)
 
   
   - [Acknowledgments](#acknowledgments)
@@ -25,8 +25,8 @@ Amazon is the online retailer with the largest variety of products in the world.
 
 Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need to install these packages again in the following parallel computation. Also, to download the dataset form Kaggle, you may need a kaggle account and then run `kaggle_download.sh` along with the API.
 
-
-## File Description in Code Folder
+## Description
+### Files in Code Folder
 
 - `kaggle_download.sh`: to download data files from kaggle. You may need a kaggle account and an api.
 - `install_R.sh`&`interactive.sub`: to install packages that are needed.
@@ -37,7 +37,7 @@ Run `install_R.sh` on CHTC to get the packages tar.gz file so that we don't need
 - `FrequencyPlot.R`: to get plots based on output of word couting.
 
 
-## Variables
+### Variables
 The dataset contains a collection of reviews written in the Amazon.com marketplace and associated metadata from 1995 until 2015. There are 15 variables in our data set.
 
 
@@ -59,7 +59,7 @@ The dataset contains a collection of reviews written in the Amazon.com marketpla
 | review_body | The review text. |
 | review_date | The date the review was written. |
 
-## Work Structure in projectCHTC
+### Work Structure in projectCHTC
 ```
 (pre 1)     split.sh
                 |
@@ -75,13 +75,13 @@ The dataset contains a collection of reviews written in the Amazon.com marketpla
 
 
 ## Acknowledgments
-This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John Gillett.
+This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John Gillett and Yongsu Lee.
 
 
 ## Contributors
 - **Bowen Tian** - (btian23@wisc.edu) : Contribute to 
 
-- **Ouyang Xu** - (oxu2@wisc.edu) : Contribute to 
+- **Ouyang Xu** - (oxu2@wisc.edu) : Contribute to downloading Kaggle data, part of R codes for analysis and the report.
 
 - **Tinghui Xu** - (txu98@wisc.edu) : Contribute to CHTC computation and part of R codes for analysis.
 
