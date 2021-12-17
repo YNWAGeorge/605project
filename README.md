@@ -79,7 +79,7 @@ This is a project of STAT 605 Fall 2021 at UW-Madison, supervised by Prof. John 
 
 
 ## Contributors
-- **Bowen Tian** - (btian23@wisc.edu) : Contribute to 
+- **Bowen Tian** - (btian23@wisc.edu) : Contribute to part of R codes for analysis, first draft, slides and final report
 
 - **Ouyang Xu** - (oxu2@wisc.edu) : Contribute to downloading Kaggle data, part of R codes for analysis and the report.
 
